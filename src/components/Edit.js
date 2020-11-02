@@ -8,7 +8,7 @@ const Edit = (props) => {
         <div>
             <div className="expenses-info">
                 <div className="container">
-                    <h1 className="expenses-info__title">Edit expense </h1>
+                    <h1 className="expense-info__title__edit">Edit expense </h1>
                 </div>
             </div>
 

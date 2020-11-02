@@ -1,5 +1,6 @@
 .expense-info {
-    background: #f7f7f7;
+    background: $brand-darkblue;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     padding: $l_size 0;
     margin-bottom: $l_size;
 
@@ -11,6 +12,10 @@
     span {
         font-weight: bold;
     }
+}
+
+.expense-info__title__edit {
+    // color: $brand-lighter;
 }
 
 .expense-info__actions {

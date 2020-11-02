@@ -11,7 +11,7 @@ export const ExpensesSummary = (props) => {
 	return (
 		<div className="expense-info">
 			<div className="container">
-				<h1 className="expense-info__title">Viewing <span>{expenseCount}</span> {expenseCount === 1 ? 'expense' : 'expenses'} totalling <span>{numeral(expensesTotal / 100).format('$0,0.00')}</span></h1>
+				<h1 className="expense-info__title">Currenly showing <span>{expenseCount}</span> {expenseCount === 1 ? 'expense' : 'expenses'}. Total <span>{numeral(expensesTotal / 100).format('$0,0.00')}</span></h1>
 				<div className="expense-info__actions">
 					<Link className="button" to="/add">Add expense</Link>
 				</div>
