@@ -11,6 +11,7 @@ import Help from '../components/Help'
 import Fof from '../components/Fof'
 import Login from '../components/Login';
 import PrivateRoute from './PrivateRoute'
+import PublicRoute from './PublicRoute'
 
 export const history = createHistory()
 
@@ -20,10 +21,10 @@ const AppRoutes = () => (
             {/* <Header /> */}
 
             <Switch>
-                <Route 
-                    path="/" 
-                    component={Login} 
-                    exact={true}></Route>
+                <PublicRoute
+                    path="/"
+                    component={Login}
+                    exact={true}></PublicRoute>
 
                 <PrivateRoute 
                     path="/dashboard" 
@@ -40,12 +41,12 @@ const AppRoutes = () => (
                     component={Edit}>
                     exact={true}</PrivateRoute>
 
-                <Route 
+                {/* <Route 
                     path="/help" 
                     component={Help}> 
-                    exact={true}</Route>
+                    exact={true}</Route> */}
 
-                <Route 
+                <Route
                     component={Fof}></Route>
             </Switch>
         </div>

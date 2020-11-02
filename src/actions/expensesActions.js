@@ -6,11 +6,11 @@ import db from '../firebase/firebase';
 import { database } from 'firebase';
 
 export const startAddExpense = (data = {}) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         const {amount = 0, description = '', createdAt = 0, note = ''} = data;
-
+        const uid = getState().auth.uid;
         const expenseToAdd = {amount, description, createdAt, note}
-        db.ref('expenses')
+        db.ref(`users/${uid}/expenses`)
         .push(expenseToAdd)
         .then(response => {
             const exp = {id: response.key,...expenseToAdd}
@@ -23,9 +23,10 @@ export const startAddExpense = (data = {}) => {
 }
 
 export const startSetExpenses = () => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
         const expenses = []
-        return  db.ref('expenses')
+        return db.ref(`users/${uid}/expenses`)
             .once('value')
             .then(response => {
                 response.forEach(item => {
@@ -43,8 +44,9 @@ export const startSetExpenses = () => {
 }
 
 export const startRemoveExpense = (id) => {
-    return (dispatch) => {
-        db.ref(`expenses/${id}`)
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        db.ref(`users/${uid}/expenses/${id}`)
         .remove()
         .then(response => {
             dispatch(removeExpense(id))
@@ -56,8 +58,10 @@ export const startRemoveExpense = (id) => {
 }
 
 export const startEditExpense = (id, updates) => {
-    return (dispatch) => {
-        return db.ref(`expenses/${id}`)
+    return (dispatch, getState) => {
+        const uid = getState().auth.uid;
+        console.log('uid: ', uid);
+        return db.ref(`users/${uid}/expenses/${id}`)
             .update(updates)
             .then(response => {
                 dispatch(editExpense(id, updates))
