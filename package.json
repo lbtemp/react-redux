@@ -5,7 +5,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/server.js",
     "serve": "live-server public/",
     "build": "webpack",
     "build:prod": "webpack -p --env production",
