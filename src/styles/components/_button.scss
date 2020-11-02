@@ -1,0 +1,23 @@
+.button {
+    background: $brand-blue;
+    color:white;
+    border: none;
+    padding: $s_size;
+    font-weight: 300;
+    font-size: $m_size;
+    display:inline-block;
+    text-decoration: none;
+    line-height: 1;
+
+    &.login-button {
+        margin-top: 15px;
+    }
+}
+
+.button--link {
+    background:none;
+}
+
+.button--danger {
+    background:$brand-danger;
+}

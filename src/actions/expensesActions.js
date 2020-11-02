@@ -60,7 +60,6 @@ export const startRemoveExpense = (id) => {
 export const startEditExpense = (id, updates) => {
     return (dispatch, getState) => {
         const uid = getState().auth.uid;
-        console.log('uid: ', uid);
         return db.ref(`users/${uid}/expenses/${id}`)
             .update(updates)
             .then(response => {

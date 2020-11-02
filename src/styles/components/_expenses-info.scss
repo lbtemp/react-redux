@@ -1,0 +1,18 @@
+.expense-info {
+    background: #f7f7f7;
+    padding: $l_size 0;
+    margin-bottom: $l_size;
+
+}
+
+.expense-info__title {
+    font-weight: 300;
+    margin: 0;
+    span {
+        font-weight: bold;
+    }
+}
+
+.expense-info__actions {
+    margin-top: $m_size;
+}

@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 62.5%;
 }
@@ -5,7 +9,7 @@ html {
 body {
     font-family: Arial, Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
     font-size: $m_size;
-    background-color: $brand-dark;
+    background-color: $brand-darkblue;
 }
 
 button:disabled {

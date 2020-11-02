@@ -6,17 +6,19 @@ import moment from 'moment';
 import numeral from 'numeral';
 
 const ExpenseItem = ({expense, dispatch}) => (
-    <div>
-        <h3>
-            <Link to={`/edit/${expense.id}`}>{expense.description}</Link>
+    <Link className="list-item" to={`/edit/${expense.id}`}>
+        <div>
+            <h3 className="list-item__title">{expense.description}</h3>
+            <span className="list-item_subtitle">{moment(expense.createdAt).format('MMMM Do, YYYY')}</span>
+        </div>
+
+        <h3 className="list-item__amount">
+            {numeral(expense.amount / 100).format('$0,0.00')}
         </h3>
 
-        <p>
-            {numeral(expense.amount / 100).format('$0,0.00')} - 
-            {moment(expense.createdAt).format('MMMM Do, YYYY')}
-        </p>
         {/* <button onClick={() => dispatch(startRemoveExpense({id: expense.id}))}> Remove expense </button> */}
-    </div>
+    
+    </Link>
 )
 
 const mapStateToProps = (state) => ({state})

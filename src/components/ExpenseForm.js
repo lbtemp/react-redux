@@ -59,17 +59,17 @@ export default class ExpenseForm extends React.Component {
 			this.props.formSubmitted(toSave);
 		}
 	};
-	handleRemoveExpense = () => this.props.removeExpense();
+	// handleRemoveExpense = () => this.props.removeExpense();
 
 	render() {
 		return (
-			<div>
-				{
-					this.state.error && <p><b>{this.state.error}</b></p>
-				}
+				<form className="form" onSubmit={this.handleFormSubmit}>
+					{
+						this.state.error && <p className="form__error"><b>{this.state.error}</b></p>
+					}
 
-				<form onSubmit={this.handleFormSubmit}>
 					<input
+						className="text-input"
 						type="text"
 						placeholder="Description"
 						autoFocus
@@ -78,6 +78,7 @@ export default class ExpenseForm extends React.Component {
 					/>
 
 					<input
+						className="text-input"
 						type="text"
 						placeholder="Amount"
 						value={this.state.amount}
@@ -94,19 +95,19 @@ export default class ExpenseForm extends React.Component {
 					/>
 
 					<textarea
+						className="textarea"
 						placeholder="Add a note for your expense (optional)"
 						value={this.state.note}
 						onChange={this.handleNoteInput}
 					>
 					</textarea>
 
-					<button>Add Expense</button>
+					<div>
+						<button className="button">Add Expense</button>
+					</div>
 				</form>
 
-				{
-					this.props.removeExpense && <button onClick={this.handleRemoveExpense}> Remove expense </button>
-				}
-			</div>
+
 		)
 	}
 }

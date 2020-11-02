@@ -9,13 +9,19 @@ import expensesWithFilters from '../selectors/expensesSelectors';
 import ExpenseListFilter from './ExpenseListFilter'
 
 const ExpensesList = (props) => (
-	<div>
+	<div className="container">
 		<ExpenseListFilter />
-		<h2>This is expenses</h2>
+
+		<div className="list-header">
+			<div className="for-mobile">Expenses</div>
+			<div className="for-desktop">Expense</div>	
+			<div className="for-desktop">Amount</div>	
+		</div>
 
 		{
-			props.expenses.length > 0 && 
-			props.expenses.map((expense, index) => <ExpenseItem key={index} expense={expense} /> )
+			props.expenses.length > 0
+			? props.expenses.map((expense, index) => <ExpenseItem key={index} expense={expense} /> )
+			: <div className="list-item list-item__message"> <span>So empty.. such oreos.. no expenses.. wow</span> </div>
 		}
 	</div>
 )
