@@ -1,19 +1,16 @@
 import * as firebase from 'firebase';
-
-var baseconfig = {
-	apiKey: "AIzaSyAhxmvimBefAd96R_IUW7dAzYWTkJUnvZk",
-	authDomain: "react-redux-budgetify.firebaseapp.com",
-	databaseURL: "https://react-redux-budgetify.firebaseio.com",
-	projectId: "react-redux-budgetify",
-	storageBucket: "react-redux-budgetify.appspot.com",
-	messagingSenderId: "984283757214",
-	appId: "1:984283757214:web:bff2e00fa25e518b04998f",
-	measurementId: "G-TPSBCW91GL"
-};
   
+var baseconfig = {
+	apiKey: process.env.FIREBASE_API_KEY,
+	authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+	databaseURL: process.env.FIREBASE_DATABASE_URL,
+	projectId: process.env.FIREBASE_PROJECT_ID,
+	storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+};  
 
 firebase.initializeApp(baseconfig)
 
-firebase.database().ref().set({
-	name: 'mitilian'
-})
+const db = firebase.database()
+
+export {firebase, db as default}

@@ -1,6 +1,6 @@
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
-// import './firebase/firebase';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -15,6 +15,9 @@ import configureStore from './store/expensesStore';
 // Redux actions
 import {addExpense} from './actions/expensesActions'
 import {setTextFilter, sortByAmount} from './actions/filtersActions'
+
+// DB
+// import './firebase/firebase';
 
 // SET STORE
 const store = configureStore();
