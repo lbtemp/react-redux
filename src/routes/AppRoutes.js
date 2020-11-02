@@ -1,5 +1,7 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom';
+import {Router, Route, Switch, Link, NavLink} from 'react-router-dom';
+
+import createHistory from 'history/createBrowserHistory';
 
 import Dashboard from '../components/Dashboard'
 import Header from '../components/Header'
@@ -7,27 +9,36 @@ import Add from '../components/Add'
 import Edit from '../components/Edit'
 import Help from '../components/Help'
 import Fof from '../components/Fof'
+import Login from '../components/Login';
+import PrivateRoute from './PrivateRoute'
+
+export const history = createHistory()
 
 const AppRoutes = () => (
-    <BrowserRouter>
+    <Router history={history}>
         <div>
-            <Header />
+            {/* <Header /> */}
 
             <Switch>
                 <Route 
                     path="/" 
-                    component={Dashboard} 
+                    component={Login} 
                     exact={true}></Route>
 
-                <Route 
+                <PrivateRoute 
+                    path="/dashboard" 
+                    component={Dashboard}> 
+                    exact={true}</PrivateRoute>
+
+                <PrivateRoute 
                     path="/add" 
                     component={Add}> 
-                    exact={true}</Route>
+                    exact={true}</PrivateRoute>
 
-                <Route 
+                <PrivateRoute 
                     path="/edit/:id" 
                     component={Edit}>
-                    exact={true}</Route>
+                    exact={true}</PrivateRoute>
 
                 <Route 
                     path="/help" 
@@ -38,7 +49,7 @@ const AppRoutes = () => (
                     component={Fof}></Route>
             </Switch>
         </div>
-    </BrowserRouter>
+    </Router>
 )
 
 export default AppRoutes;

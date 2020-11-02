@@ -20,10 +20,10 @@ const ExpensesList = (props) => (
 	</div>
 )
 
-const connectExnepsesList = (state) => {
+const mapStateToProps = (state) => {
 	return {
 		expenses: expensesWithFilters(state.expenses, state.filters)
 	}
 }
 
-export default connect(connectExnepsesList)(ExpensesList)
+export default connect(mapStateToProps)(ExpensesList)

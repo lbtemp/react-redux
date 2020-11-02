@@ -12,11 +12,11 @@ const Edit = (props) => {
                 expenseToEdit={props.expenseToEdit}
                 formSubmitted={((editedExpense) => {
                     props.dispatch(startEditExpense(props.expenseToEdit.id, editedExpense));
-                    props.history.push('/');
+                    props.history.push('/dashboard');
                 })}
                 removeExpense={() => {
                     props.dispatch(startRemoveExpense(props.expenseToEdit.id));
-                    props.history.push('/');
+                    props.history.push('/dashboard');
                 }}
             />
         </div>
@@ -30,5 +30,6 @@ const mapStateToProps = (state, props) => {
 
     return {expenseToEdit};
 }
+
 
 export default connect(mapStateToProps)(Edit)

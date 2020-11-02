@@ -11,7 +11,7 @@ const Add = (props) => {
             <ExpenseForm 
                 formSubmitted={((addedExpense) => {
                     props.dispatch(startAddExpense(addedExpense))
-                    props.history.push('/')
+                    props.history.push('/dashboard')
                 })}
             />
         </div>

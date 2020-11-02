@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
 // Routes
-import AppRoutes from './routes/AppRoutes';
+import AppRoutes, {history} from './routes/AppRoutes';
 
 // Redux store
 import configureStore from './store/expensesStore';
@@ -15,9 +15,10 @@ import configureStore from './store/expensesStore';
 // Redux actions
 import {addExpense, startSetExpenses} from './actions/expensesActions'
 import {setTextFilter, sortByAmount} from './actions/filtersActions'
+import {login, logout} from './actions/authActions'
 
 // DB
-// import './firebase/firebase';
+import {firebase} from './firebase/firebase';
 
 // SET STORE
 const store = configureStore();
@@ -39,10 +40,31 @@ const jsx = (
 
 ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
 
-store.dispatch(startSetExpenses())
-.then(() => {
-    ReactDOM.render(jsx, document.getElementById('app'));
-})
-.catch(e => {
-    console.log('e: ', e);
+let hasRendered = false;
+const render = () => {
+    if (!hasRendered) {
+        ReactDOM.render(jsx, document.getElementById('app'))
+        hasRendered = true;
+    }
+}
+
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        store.dispatch(login(user.uid));
+        store.dispatch(startSetExpenses())
+            .then(() => {
+                render();
+
+                if (history.location.pathname === '/') {
+                    history.push('/dashboard')
+                }
+            })
+            .catch(e => {
+                console.log('FETCH err: ', e);
+            })
+    } else {
+        store.dispatch(logout())
+        render()
+        history.push('/')
+    }
 })
