@@ -3,6 +3,7 @@
 */
 
 import db from '../firebase/firebase';
+import { database } from 'firebase';
 
 export const startAddExpense = (data = {}) => {
     return (dispatch) => {
@@ -15,6 +16,9 @@ export const startAddExpense = (data = {}) => {
             const exp = {id: response.key,...expenseToAdd}
             dispatch(addExpense(exp))
         })
+        .catch(e => {
+            console.log('add err: ', e);
+        })
     }
 }
 
@@ -22,16 +26,45 @@ export const startSetExpenses = () => {
     return (dispatch) => {
         const expenses = []
         return  db.ref('expenses')
-        .once('value')
-        .then(response => {
-            response.forEach(item => {
-                expenses.push({
-                    id:item.key, ...item.val()
+            .once('value')
+            .then(response => {
+                response.forEach(item => {
+                    expenses.push({
+                        id:item.key, ...item.val()
+                    })
                 })
-            })
 
-            dispatch(setExpenses(expenses))
+                dispatch(setExpenses(expenses))
+            })
+            .catch(e => {
+                console.log('fetch err: ', e);
+            })
+    }
+}
+
+export const startRemoveExpense = (id) => {
+    return (dispatch) => {
+        db.ref(`expenses/${id}`)
+        .remove()
+        .then(response => {
+            dispatch(removeExpense(id))
         })
+        .catch(e => {
+            console.log('remove err: ', e);
+        })
+    }
+}
+
+export const startEditExpense = (id, updates) => {
+    return (dispatch) => {
+        return db.ref(`expenses/${id}`)
+            .update(updates)
+            .then(response => {
+                dispatch(editExpense(id, updates))
+            })
+            .catch(e => {
+                console.log('update err: ', e);
+            })
     }
 }
 

@@ -11,7 +11,7 @@ export default class ExpenseForm extends React.Component {
 		this.state = {
 			description: props.expenseToEdit ? props.expenseToEdit.description : '',
 			note: props.expenseToEdit ? props.expenseToEdit.note : '',
-			amount: props.expenseToEdit ? props.expenseToEdit.amount : '',
+			amount: props.expenseToEdit ? (props.expenseToEdit.amount / 100).toString() : '',
 			createdAt: props.expenseToEdit && props.expenseToEdit.createdAt ? moment(this.props.expenseToEdit.createdAt) : moment(),
 			calendarFocused: false,
 			error: ''
