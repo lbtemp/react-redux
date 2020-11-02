@@ -12,16 +12,30 @@ export const startAddExpense = (data = {}) => {
         db.ref('expenses')
         .push(expenseToAdd)
         .then(response => {
-            console.log('response: ', response);
-            dispatch(addExpense({
-                id: response.key,
-                ...expenseToAdd
-            }))
+            const exp = {id: response.key,...expenseToAdd}
+            dispatch(addExpense(exp))
         })
     }
 }
 
-import uuid from 'uuid';
+export const startSetExpenses = () => {
+    return (dispatch) => {
+        const expenses = []
+        return  db.ref('expenses')
+        .once('value')
+        .then(response => {
+            response.forEach(item => {
+                expenses.push({
+                    id:item.key, ...item.val()
+                })
+            })
+
+            dispatch(setExpenses(expenses))
+        })
+    }
+}
+
+export const setExpenses = (expenses) => ({type: 'SET_EXPENSES', expenses})
 
 export const addExpense = (expense) => ({type: 'ADD_EXPENSE', expense});
 

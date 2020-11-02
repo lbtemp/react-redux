@@ -13,7 +13,7 @@ import AppRoutes from './routes/AppRoutes';
 import configureStore from './store/expensesStore';
 
 // Redux actions
-import {addExpense} from './actions/expensesActions'
+import {addExpense, startSetExpenses} from './actions/expensesActions'
 import {setTextFilter, sortByAmount} from './actions/filtersActions'
 
 // DB
@@ -23,13 +23,13 @@ import {setTextFilter, sortByAmount} from './actions/filtersActions'
 const store = configureStore();
 
 //ADD
-store.dispatch(addExpense({amount: 5000, description: 'rent', createdAt: 212122}))
-store.dispatch(addExpense({amount: 3500, description: 'food', createdAt: 650}))
-store.dispatch(addExpense({amount: 22500, description: 'car', createdAt: 1550}))
+// store.dispatch(addExpense({amount: 5000, description: 'rent', createdAt: 212122}))
+// store.dispatch(addExpense({amount: 3500, description: 'food', createdAt: 650}))
+// store.dispatch(addExpense({amount: 22500, description: 'car', createdAt: 1550}))
 
 // LOG STATE
-const __state = store.getState()
-console.log('APP __state: ', __state);
+// const __state = store.getState()
+// console.log('APP __state: ', __state);
 
 const jsx = (
     <Provider store={store}>
@@ -37,4 +37,12 @@ const jsx = (
     </Provider>
 )
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+
+store.dispatch(startSetExpenses())
+.then(() => {
+    ReactDOM.render(jsx, document.getElementById('app'));
+})
+.catch(e => {
+    console.log('e: ', e);
+})
